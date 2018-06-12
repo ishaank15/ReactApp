@@ -3,7 +3,7 @@ import React from 'react';
 import TextField from './TextField'
 import PasswordField from './PasswordField'
 const FormItem = Form.Item;
-const WrappedLoginForm = {}
+import 'antd/dist/antd.css'
 
 class NormalLoginForm extends React.Component {
   handleSubmit = (e) => {
