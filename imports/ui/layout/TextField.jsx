@@ -4,12 +4,12 @@ import React from 'react';
 const FormItem = Form.Item;
 
 
-export default class PasswordField extends React.Component {
+export default class TextField extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             'getFieldDecorator': this.props.getFieldDecorator,
-            'textFieldId': this.props.textFieldId,
+            'textFieldId': this.props.TextFieldId,
             'placeholderMessage' :  this.props.placeholderMessage
         }
     }
@@ -17,14 +17,10 @@ export default class PasswordField extends React.Component {
         const { textFieldId, getFieldDecorator, placeholderMessage}  = this.state;
         return ( 
         <FormItem>
-            {getFieldDecorator('password', {
-                rules: [{ required: true, message: 'Please input your Password!' }],
-            })(
-                <Input prefix={<Icon type="lock" />} type="password" placeholder="Password" />
+            {getFieldDecorator(`${textFieldId}`, { rules: [{ required: true, message: placeholderMessage }]})(
+            <Input prefix={<Icon type="user" />} placeholder="Username" />
             )}
-        </FormItem>
-  
-        )
+        </FormItem>)
        
     }
 }

@@ -4,7 +4,7 @@ import React from 'react';
 const FormItem = Form.Item;
 
 
-export default class TextField extends React.Component {
+export default class PasswordField extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,10 +17,14 @@ export default class TextField extends React.Component {
         const { textFieldId, getFieldDecorator, placeholderMessage}  = this.state;
         return ( 
         <FormItem>
-            {getFieldDecorator('${textFieldId}', { rules: [{ required: true, message: placeholderMessage }]})(
-            <Input prefix={<Icon type="user" />} placeholder="Username" />
+            {getFieldDecorator('password', {
+                rules: [{ required: true, message: placeholderMessage}],
+            })(
+                <Input prefix={<Icon type="lock" />} type="password" placeholder="Password" />
             )}
-        </FormItem>)
+        </FormItem>
+  
+        )
        
     }
 }

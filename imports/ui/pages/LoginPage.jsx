@@ -1,21 +1,43 @@
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
-import React from 'react';
-import TextField from './TextField'
-import PasswordField from './PasswordField'
-const FormItem = Form.Item;
+import { Meteor } from 'meteor/meteor'
 import 'antd/dist/antd.css'
 
+import React from 'react';
+import TextField from '../layout/TextField'
+import PasswordField from '../layout/PasswordField'
+const FormItem = Form.Item;
+
 class NormalLoginForm extends React.Component {
+	constructor(props){
+    super(props);
+    this.state = {
+      error: ''
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+				console.log('Received values of form: ', values);
+				const email = values.userName;
+				const password  = values.password;
+				Meteor.loginWithPassword(email, password, (err) => {
+					if(err){
+						this.setState({
+							error: err.reason
+						});
+					} else {
+						this.props.history.push('/');
+					}
+				});
       }
     });
   }
   render() {
-    const { getFieldDecorator } = this.props.form;
+		const { getFieldDecorator } = this.props.form;
+		console.log('------------------------------------------------------------')
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
 				<TextField TextFieldId='userName' getFieldDecorator={getFieldDecorator} placeholderMessage='Please input your username!'/>
@@ -35,7 +57,7 @@ class NormalLoginForm extends React.Component {
 							Log in
 						</Button>
 						<br/>
-						Or <a href="/register">register now!</a>
+						Or <a href="/signup">Register now!</a>
 					</FormItem>
       </Form>
     );
