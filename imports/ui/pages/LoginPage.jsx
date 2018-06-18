@@ -23,21 +23,28 @@ class NormalLoginForm extends React.Component {
 				console.log('Received values of form: ', values);
 				const email = values.userName;
 				const password  = values.password;
-				Meteor.loginWithPassword(email, password, (err) => {
-					if(err){
-						this.setState({
-							error: err.reason
-						});
-					} else {
-						this.props.history.push('/');
-					}
-				});
+				
+				try{
+					Meteor.loginWithPassword(email, password, (err) => {
+						if(err){
+							this.setState({
+								error: err.reason
+							});
+							throw new Meteor.Error();
+						} else {
+							this.props.history.push('/');
+						}
+					});
+				}
+				catch(err) {
+					console.log('................', err)
+				}
+		
       }
     });
   }
   render() {
 		const { getFieldDecorator } = this.props.form;
-		console.log('------------------------------------------------------------')
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
 				<TextField TextFieldId='userName' getFieldDecorator={getFieldDecorator} placeholderMessage='Please input your username!'/>

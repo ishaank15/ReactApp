@@ -2,6 +2,7 @@ import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Butto
 import React, { Component } from 'react';
 import { withHistory, Link } from 'react-router-dom';
 import { Accounts } from 'meteor/accounts-base';
+
 const FormItem = Form.Item;
 const Option = Select.Option;
 const AutoCompleteOption = AutoComplete.Option;
@@ -25,19 +26,25 @@ class RegistrationForm extends React.Component {
         const email = values.email;
         const username = values.username;
         const password = values.password;
-        console.log('Received values of form: ', values);
-
         this.setState({error: "test"});
-        Accounts.createUser({email: email, username: name, password: password}, (err) => {
+        try {
+          Accounts.createUser({email: email, username: name, password: password}, (err) => {
             if(err){
               this.setState({
                 error: err.reason
               });
+              throw new Meteor.Error(err)
             } else {
+              const templateData = {
+                name: username
+              };
               this.props.history.push('/login');
             }
           });
-      
+        }
+        catch(err) {
+          console.log('...........error......', err)
+        }
       }
     });
   }
