@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withHistory } from 'react-router-dom';
 import MainContainer from './MainContainer.jsx';
+import { message } from 'antd';
 
 export default class AppContainer extends Component {
   constructor(props){
@@ -17,6 +18,8 @@ export default class AppContainer extends Component {
     if (!this.state.isAuthenticated) {
       this.props.history.push('/login');
     }
+    else
+      this.props.history.push('/');
   }
 
   componentDidUpdate(prevProps, prevState){
@@ -25,12 +28,13 @@ export default class AppContainer extends Component {
     }
   }
 
-  logout(e){
-    e.preventDefault();
+  logout(event){
+    event.preventDefault();
     Meteor.logout( (err) => {
         if (err) {
             console.log( err.reason );
         } else {
+            message.success('Successfully Logged Out')
             this.props.history.push('/login');
         }
     });
@@ -40,7 +44,9 @@ export default class AppContainer extends Component {
     return (
       <div>
         <a href="#">Auth App</a>
+        ------------------------------------------------------------------
         <a href="#" onClick={this.logout}>Logout</a>
+        ------------------------------------------------------------------
         <MainContainer />
       </div>
     );

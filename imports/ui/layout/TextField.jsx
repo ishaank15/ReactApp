@@ -17,8 +17,10 @@ export default class TextField extends React.Component {
         const { textFieldId, getFieldDecorator, placeholderMessage}  = this.state;
         return ( 
         <FormItem>
-            {getFieldDecorator(`${textFieldId}`, { rules: [{ required: true, message: placeholderMessage }]})(
-            <Input prefix={<Icon type="user" />} placeholder="Username" />
+            {getFieldDecorator(`${textFieldId}`, { rules: [{ required: true, message: placeholderMessage ,
+            initialValue: ''
+            }]})(
+            <Input prefix={<Icon type="user" />} placeholder="Username"/>
             )}
         </FormItem>)
        

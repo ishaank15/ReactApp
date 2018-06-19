@@ -35,9 +35,6 @@ class RegistrationForm extends React.Component {
               });
               throw new Meteor.Error(err)
             } else {
-              const templateData = {
-                name: username
-              };
               this.props.history.push('/login');
             }
           });
@@ -69,16 +66,6 @@ class RegistrationForm extends React.Component {
       form.validateFields(['confirm'], { force: true });
     }
     callback();
-  }
-
-  handleWebsiteChange = (value) => {
-    let autoCompleteResult;
-    if (!value) {
-      autoCompleteResult = [];
-    } else {
-      autoCompleteResult = ['.com', '.org', '.net'].map(domain => `${value}${domain}`);
-    }
-    this.setState({ autoCompleteResult });
   }
 
   render() {
@@ -175,6 +162,10 @@ class RegistrationForm extends React.Component {
         </FormItem>
         <FormItem {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">Register</Button>
+        </FormItem>
+        
+        <FormItem {...tailFormItemLayout}>
+        'Already have an account?'<Button type="primary" htmlType="submit" href='/login'>Login</Button>
         </FormItem>
       </Form>
     );

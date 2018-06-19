@@ -1,7 +1,7 @@
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import { Meteor } from 'meteor/meteor'
 import 'antd/dist/antd.css'
-
+import { message } from 'antd';
 import React from 'react';
 import TextField from '../layout/TextField'
 import PasswordField from '../layout/PasswordField'
@@ -11,10 +11,17 @@ class NormalLoginForm extends React.Component {
 	constructor(props){
     super(props);
     this.state = {
-      error: ''
+      error: '',
+	  isAuthenticated: Meteor.userId() !== null ,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  componentWillMount() {
+    if (this.state.isAuthenticated) {
+        this.props.history.push('/');
+    }
+  }       
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -29,9 +36,11 @@ class NormalLoginForm extends React.Component {
 						if(err){
 							this.setState({
 								error: err.reason
-							});
+                            });
+							message.error(this.state.error)
 							throw new Meteor.Error();
 						} else {
+							message.success('Successfully Logged In')
 							this.props.history.push('/');
 						}
 					});
