@@ -16,7 +16,7 @@ export default class TextField extends React.Component {
     render() {
         const { textFieldId, getFieldDecorator, placeholderMessage}  = this.state;
         return ( 
-        <FormItem>
+        <FormItem label="E-mail">
             {getFieldDecorator(`${textFieldId}`, { rules: [{ required: true, message: placeholderMessage ,
             initialValue: ''
             }]})(

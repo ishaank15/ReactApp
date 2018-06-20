@@ -1,6 +1,8 @@
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import { Meteor } from 'meteor/meteor'
 import 'antd/dist/antd.css'
+import './login.css'
+
 import { message } from 'antd';
 import React from 'react';
 import TextField from '../layout/TextField'
@@ -55,27 +57,29 @@ class NormalLoginForm extends React.Component {
   render() {
 		const { getFieldDecorator } = this.props.form;
     return (
-      <Form onSubmit={this.handleSubmit} className="login-form">
-				<TextField TextFieldId='userName' getFieldDecorator={getFieldDecorator} placeholderMessage='Please input your username!'/>
-				<PasswordField TextFieldId='password' getFieldDecorator={getFieldDecorator} placeholderMessage='Please input your Password!'/>
-				<br/>	
-					<FormItem>
-						{getFieldDecorator('remember', {
-							valuePropName: 'checked',
-							initialValue: true,
-						})(
-							<Checkbox>Remember me</Checkbox>
-						)}
-						<br/>
-						<a className="login-form-forgot" href="/forgot-password">Forgot password</a>
-						<br/>
-						<Button type="primary" htmlType="submit" className="login-form-button">
-							Log in
-						</Button>
-						<br/>
-						Or <a href="/signup">Register now!</a>
-					</FormItem>
-      </Form>
+			<div className="Login">
+				<Form onSubmit={this.handleSubmit} className="login-form">
+					<TextField TextFieldId='userName' getFieldDecorator={getFieldDecorator} placeholderMessage='Please input your username!'/>
+					<PasswordField TextFieldId='password' getFieldDecorator={getFieldDecorator} placeholderMessage='Please input your Password!'/>
+					<br/>	
+						<FormItem>
+							{getFieldDecorator('remember', {
+								valuePropName: 'checked',
+								initialValue: true,
+							})(
+								<Checkbox>Remember me</Checkbox>
+							)}
+							<br/>
+							<a className="login-form-forgot" href="/forgot-password">Forgot password</a>
+							<br/>
+							<Button type="primary" htmlType="submit" className="login-form-button">
+								Log in
+							</Button>
+							<br/>
+							Or <a href="/signup">Register now!</a>
+						</FormItem>
+				</Form>
+			</div>
     );
   }
 }

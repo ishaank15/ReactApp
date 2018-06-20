@@ -2,7 +2,7 @@ import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Butto
 import React, { Component } from 'react';
 import { withHistory, Link } from 'react-router-dom';
 import { Accounts } from 'meteor/accounts-base';
-
+import { message } from 'antd';
 const FormItem = Form.Item;
 const Option = Select.Option;
 const AutoCompleteOption = AutoComplete.Option;
@@ -33,6 +33,7 @@ class RegistrationForm extends React.Component {
               this.setState({
                 error: err.reason
               });
+							message.error(this.state.error)
               throw new Meteor.Error(err)
             } else {
               this.props.history.push('/login');

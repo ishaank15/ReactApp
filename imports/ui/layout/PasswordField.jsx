@@ -16,7 +16,7 @@ export default class PasswordField extends React.Component {
     render() {
         const { textFieldId, getFieldDecorator, placeholderMessage}  = this.state;
         return ( 
-        <FormItem>
+        <FormItem label="Password">
             {getFieldDecorator('password', {
                 rules: [{ required: true, message: placeholderMessage}],
             })(

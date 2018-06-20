@@ -10,8 +10,6 @@ export default class MainPage extends Component {
   }
 
   render(){
-    const users =  Meteor.users.find().fetch();
-    console.log(users)
     // let currentUser = this.props.currentUser;
     // let userDataAvailable = (currentUser !== undefined);
     // let loggedIn = (currentUser && userDataAvailable);

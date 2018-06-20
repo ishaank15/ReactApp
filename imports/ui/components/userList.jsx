@@ -8,14 +8,17 @@ export default class UserList extends React.Component {
 
 	render() {
         const users =  Meteor.users.find().fetch();
-        console.log('...........', users)
+        // Meteor.users.remove
 		return (
             <Content style={{ padding: '0 50px', marginTop: 64 }}>
                 <div style={{ background: '#fff', padding: 24, minHeight: 380 }}>
                 <Collapse accordion>
                     {users.map((item)=> (
-                        <Panel header={item.emails ? item.emails[0].address: item._id} key={item._id}>
-                            <p>User details will be mentioned here later</p>
+                        <Panel header={item.username ? item.username: item._id} key={item._id}>
+                            <p>
+                                UserId: {item._id}<br/><br/>
+                                Username: {item.username}
+                            </p>
                         </Panel>
                     ))}
                 </Collapse>

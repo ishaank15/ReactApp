@@ -1,0 +1,15 @@
+@media all and (min-width: 480px) {
+    .Login {
+      padding: 60px 0;
+    }
+  
+    .login-form {
+      margin: 0 auto;
+      max-width: 320px;
+      align-content: center;
+    }
+
+    .ant-message-notice {
+        text-align: right;
+    }
+  }
