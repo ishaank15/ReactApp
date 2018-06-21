@@ -13,6 +13,9 @@ export default class Dashboard extends React.Component {
 						<Menu.Item key="1">User List</Menu.Item>
 						<Menu.Item key="2">Upcoming</Menu.Item>
 						<Menu.Item key="3">Soon</Menu.Item>
+						<Menu.Item key="4">.</Menu.Item>
+						<Menu.Item key="6">.</Menu.Item>
+						<Menu.Item key="7">Logout</Menu.Item>						
 					</Menu>
 				</Header>
 				<UserList/>

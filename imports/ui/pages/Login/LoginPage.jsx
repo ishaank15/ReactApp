@@ -5,8 +5,8 @@ import './login.css'
 
 import { message } from 'antd';
 import React from 'react';
-import TextField from '../layout/TextField'
-import PasswordField from '../layout/PasswordField'
+import TextField from './TextField'
+import PasswordField from './PasswordField'
 const FormItem = Form.Item;
 
 class NormalLoginForm extends React.Component {
@@ -57,9 +57,10 @@ class NormalLoginForm extends React.Component {
   render() {
 		const { getFieldDecorator } = this.props.form;
     return (
-			<div className="Login">
+			<div className="login-page">
+			<h1 align="center">LOGIN</h1>
 				<Form onSubmit={this.handleSubmit} className="login-form">
-					<TextField TextFieldId='userName' getFieldDecorator={getFieldDecorator} placeholderMessage='Please input your username!'/>
+					<TextField TextFieldId='userName' getFieldDecorator={getFieldDecorator} placeholderMessage='Please input your email/username!'/>
 					<PasswordField TextFieldId='password' getFieldDecorator={getFieldDecorator} placeholderMessage='Please input your Password!'/>
 					<br/>	
 						<FormItem>

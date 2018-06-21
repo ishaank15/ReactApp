@@ -8,21 +8,20 @@ export default class TextField extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            'username': '',
             'getFieldDecorator': this.props.getFieldDecorator,
             'textFieldId': this.props.TextFieldId,
             'placeholderMessage' :  this.props.placeholderMessage
         }
     }
     render() {
-        const { textFieldId, getFieldDecorator, placeholderMessage}  = this.state;
+        const { textFieldId, getFieldDecorator, placeholderMessage, username}  = this.state;
         return ( 
-        <FormItem label="E-mail">
-            {getFieldDecorator(`${textFieldId}`, { rules: [{ required: true, message: placeholderMessage ,
-            initialValue: ''
+        <FormItem label="Email/Username">
+            {getFieldDecorator(`${textFieldId}`, { rules: [{ required: true, message: placeholderMessage
             }]})(
-            <Input prefix={<Icon type="user" />} placeholder="Username"/>
+            <Input prefix={<Icon type="user" />} placeholder="Username"  />
             )}
         </FormItem>)
-       
     }
 }

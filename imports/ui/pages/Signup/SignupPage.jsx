@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { withHistory, Link } from 'react-router-dom';
 import { Accounts } from 'meteor/accounts-base';
 import { message } from 'antd';
+import './SignUpPage.css'
 const FormItem = Form.Item;
 const Option = Select.Option;
 const AutoCompleteOption = AutoComplete.Option;
@@ -26,22 +27,28 @@ class RegistrationForm extends React.Component {
         const email = values.email;
         const username = values.username;
         const password = values.password;
-        this.setState({error: "test"});
+        const agreement = values.agreement;
         try {
-          Accounts.createUser({email: email, username: name, password: password}, (err) => {
-            if(err){
-              this.setState({
-                error: err.reason
-              });
-							message.error(this.state.error)
-              throw new Meteor.Error(err)
-            } else {
-              this.props.history.push('/login');
-            }
-          });
+          if (agreement) {
+            Accounts.createUser({email: email, username: name, password: password}, (err) => {
+              if(err){
+                this.setState({
+                  error: err.reason
+                });
+                message.error(this.state.error)
+                throw new Meteor.Error(err)
+              } else {
+                this.props.history.push('/login');
+              }
+            });
+          }
+          else {
+            message.error('Please confirm the agreement');
+            throw new Meteor.Error('Please confirm the agreement')
+          }
         }
         catch(err) {
-          console.log('...........error......', err)
+          console.log('......error......', err)
         }
       }
     });
@@ -97,7 +104,10 @@ class RegistrationForm extends React.Component {
     };
  
     return (
-      <Form onSubmit={this.handleSubmit}>
+			<div className="register-page">
+			<h1 align="center">REGISTER</h1>
+      
+      <Form onSubmit={this.handleSubmit} className="register-form">
         <FormItem
           {...formItemLayout}
           label="E-mail"
@@ -153,22 +163,28 @@ class RegistrationForm extends React.Component {
           )}
         </FormItem>
         
-        
-        <FormItem {...tailFormItemLayout}>
-          {getFieldDecorator('agreement', {
-            valuePropName: 'checked',
-          })(
-            <Checkbox>I have read the <a href="">agreement</a></Checkbox>
-          )}
-        </FormItem>
-        <FormItem {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">Register</Button>
-        </FormItem>
-        
-        <FormItem {...tailFormItemLayout}>
-        'Already have an account?'<Button type="primary" htmlType="submit" href='/login'>Login</Button>
-        </FormItem>
+        <div className="checking">
+          <FormItem {...tailFormItemLayout} className="no-margin">
+            {getFieldDecorator('agreement', {
+              valuePropName: 'checked',
+            })(
+              <Checkbox>I have read the <a href="">agreement</a></Checkbox>
+            )}
+          </FormItem>
+          <FormItem {...tailFormItemLayout} className="no-margin">
+            <Button type="primary" htmlType="submit">Register</Button>
+          </FormItem>
+          
+          <FormItem {...tailFormItemLayout} className="no-margin">
+            'Already have an account?'
+            <br/>
+            <Button type="primary" htmlType="submit" href='/login'>
+              Login
+            </Button>
+          </FormItem>
+        </div>
       </Form>
+      </div>
     );
   }
 }
