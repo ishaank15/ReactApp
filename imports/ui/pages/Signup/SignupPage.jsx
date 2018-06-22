@@ -7,6 +7,7 @@ import './SignUpPage.css'
 const FormItem = Form.Item;
 const Option = Select.Option;
 const AutoCompleteOption = AutoComplete.Option;
+// import emailit from 'emailit'
 
 
 class RegistrationForm extends React.Component {
@@ -18,6 +19,7 @@ class RegistrationForm extends React.Component {
           autoCompleteResult: [],
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.sendEmail = this.sendEmail.bind(this);
       }
     
   handleSubmit = (e) => {
