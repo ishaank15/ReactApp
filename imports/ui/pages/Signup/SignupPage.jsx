@@ -19,7 +19,7 @@ class RegistrationForm extends React.Component {
           autoCompleteResult: [],
         };
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.sendEmail = this.sendEmail.bind(this);
+        // this.sendEmail = this.sendEmail.bind(this);
       }
     
   handleSubmit = (e) => {
