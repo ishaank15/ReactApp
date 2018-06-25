@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "start": "meteor run",
-    "lint": " '*.js'",
+    "lint": "eslint --ext .jsx .",
+    "lintfix": "eslint --fix --ext .jsx .",
     "test": "meteor test --once --driver-package meteortesting:mocha",
     "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
     "visualize": "meteor --production --extra-packages bundle-visualizer"
@@ -12,13 +13,13 @@
     "@babel/runtime": "^7.0.0-beta.48",
     "antd": "^3.6.2",
     "atpl": "^0.9.3",
+    "babel-plugin-import": "^1.8.0",
     "bcrypt": "^2.0.1",
     "dust": "^0.3.0",
     "dustjs-helpers": "^1.7.4",
     "dustjs-linkedin": "^2.7.5",
     "eco": "^1.1.0-rc-3",
     "ejs": "^2.6.1",
-    "emailit": "^1.8.0",
     "hamlet": "^0.3.3",
     "hamljs": "^0.6.2",
     "indexof": "0.0.1",
@@ -28,6 +29,7 @@
     "liquid-node": "^3.0.0",
     "liquor": "0.0.5",
     "meteor-node-stubs": "^0.4.1",
+    "prop-types": "^15.6.2",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-router-dom": "^4.3.1",
@@ -48,7 +50,13 @@
     "testModule": "test/main.js"
   },
   "devDependencies": {
-    "eslint": "^4.19.1",
-    "eslint-plugin-react": "^7.9.1"
+    "babel-eslint": "^8.2.5",
+    "eslint": "^5.0.0",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-import-resolver-meteor": "^0.4.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-meteor": "^5.0.0",
+    "eslint-plugin-react": "^7.10.0"
   }
 }

@@ -1,35 +1,36 @@
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
-import { Meteor } from 'meteor/meteor'
-import 'antd/dist/antd.css'
-import './login.css'
+import { Form, Button, Checkbox } from "antd";
+import { Meteor } from "meteor/meteor";
+import "antd/dist/antd.css";
+import "./login.css";
 
-import { message } from 'antd';
-import React from 'react';
-import TextField from './TextField'
-import PasswordField from './PasswordField'
+import { message } from "antd";
+import React from "react";
+import TextField from "./TextField";
+import PasswordField from "./PasswordField";
 const FormItem = Form.Item;
+import PropTypes from "prop-types";
 
 class NormalLoginForm extends React.Component {
 	constructor(props){
-    super(props);
-    this.state = {
-      error: '',
-	  isAuthenticated: Meteor.userId() !== null ,
-    };
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+		super(props);
+		this.state = {
+			error: "",
+			isAuthenticated: Meteor.userId() !== null ,
+		};
+		this.handleSubmit = this.handleSubmit.bind(this);
+	}
 
-  componentWillMount() {
-    if (this.state.isAuthenticated) {
-        this.props.history.push('/');
-    }
-  }       
+	UNSAFE_componentWillMount() {
+		if (this.state.isAuthenticated) {
+			this.props.history.push("/");
+		}
+	}       
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-				console.log('Received values of form: ', values);
+	handleSubmit(e) {
+		e.preventDefault();
+		this.props.form.validateFields((err, values) => {
+			if (!err) {
+				console.log("Received values of form: ", values);
 				const email = values.userName;
 				const password  = values.password;
 				
@@ -38,51 +39,56 @@ class NormalLoginForm extends React.Component {
 						if(err){
 							this.setState({
 								error: err.reason
-                            });
-							message.error(this.state.error)
+							});
+							message.error(this.state.error);
 							throw new Meteor.Error();
 						} else {
-							message.success('Successfully Logged In')
-							this.props.history.push('/');
+							message.success("Successfully Logged In");
+							this.props.history.push("/");
 						}
 					});
 				}
 				catch(err) {
-					console.log('................', err)
+					console.log("................", err);
 				}
 		
-      }
-    });
-  }
-  render() {
+			}
+		});
+	}
+	render() {
 		const { getFieldDecorator } = this.props.form;
-    return (
+		return (
 			<div className="login-page">
-			<h1 align="center">LOGIN</h1>
+				<h1 align="center">LOGIN</h1>
 				<Form onSubmit={this.handleSubmit} className="login-form">
-					<TextField TextFieldId='userName' getFieldDecorator={getFieldDecorator} placeholderMessage='Please input your email/username!'/>
-					<PasswordField TextFieldId='password' getFieldDecorator={getFieldDecorator} placeholderMessage='Please input your Password!'/>
+					<TextField textFieldId='userName' getFieldDecorator={getFieldDecorator} placeholderMessage='Please input your email/username!'/>
+					<PasswordField textFieldId='password' getFieldDecorator={getFieldDecorator} placeholderMessage='Please input your Password!'/>
 					<br/>	
-						<FormItem>
-							{getFieldDecorator('remember', {
-								valuePropName: 'checked',
-								initialValue: true,
-							})(
-								<Checkbox>Remember me</Checkbox>
-							)}
-							<br/>
-							<a className="login-form-forgot" href="/forgot-password">Forgot password</a>
-							<br/>
-							<Button type="primary" htmlType="submit" className="login-form-button">
+					<FormItem>
+						{getFieldDecorator("remember", {
+							valuePropName: "checked",
+							initialValue: true,
+						})(
+							<Checkbox>Remember me</Checkbox>
+						)}
+						<br/>
+						<a className="login-form-forgot" href="/forgot-password">Forgot password</a>
+						<br/>
+						<Button type="primary" htmlType="submit" className="login-form-button">
 								Log in
-							</Button>
-							<br/>
+						</Button>
+						<br/>
 							Or <a href="/signup">Register now!</a>
-						</FormItem>
+					</FormItem>
 				</Form>
 			</div>
-    );
-  }
+		);
+	}
 }
 
-export default WrappedLoginForm = Form.create()(NormalLoginForm);
+NormalLoginForm.propTypes = {
+	form: PropTypes.object,
+	history: PropTypes.object,
+};
+
+export default Form.create()(NormalLoginForm);
